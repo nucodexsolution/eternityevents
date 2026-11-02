@@ -4,19 +4,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('reel-modal');
   const modalIframe = document.getElementById('reel-modal-iframe');
   const closeModalBtn = document.getElementById('close-reel-modal');
+  const directLinkBtn = document.getElementById('modal-direct-reel-link');
 
   if (reelCards && modal && modalIframe) {
     reelCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // If clicking direct external icon, let it open Instagram in new tab
+        // If clicking the card's top-right direct external link icon, allow normal navigation
         if (e.target.closest('.direct-ig-link')) return;
 
         const reelId = card.getAttribute('data-reel-id');
-        const reelUrl = card.getAttribute('data-reel-url');
+        const reelUrl = card.getAttribute('data-reel-url') || `https://www.instagram.com/reel/${reelId}/`;
 
-        // Construct clean Instagram embed URL with auto-sizing
-        modalIframe.src = `https://www.instagram.com/p/${reelId}/embed/?cr=1&v=14&wp=540&rd=${encodeURIComponent(window.location.origin)}`;
-        
+        if (directLinkBtn) {
+          directLinkBtn.href = reelUrl;
+        }
+
+        // On mobile devices, opening directly in Instagram app/browser gives 10x better UX
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.open(reelUrl, '_blank');
+          return;
+        }
+
+        // On desktop, load in modal with fallback direct button
+        modalIframe.src = `https://www.instagram.com/reel/${reelId}/embed/captioned/`;
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
