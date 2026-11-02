@@ -1,0 +1,73 @@
+/* Media Grid & Reel Specific Styles */
+
+/* 9:16 Aspect Ratio Container for Vertical Reels */
+.aspect-reel {
+  aspect-ratio: 9 / 16;
+}
+
+/* Background YouTube Video Scaling & Covering */
+.video-background-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 ratio */
+  min-height: 100vh;
+  min-width: 177.77vh; /* 16:9 ratio */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.video-background-container iframe {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.75; /* Crisp visibility while keeping text legible */
+  filter: contrast(1.08) brightness(1.05);
+}
+
+/* Glass Reel Card Hover Effects */
+.reel-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #14161D;
+}
+
+.reel-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 20px 35px -10px rgba(212, 175, 55, 0.25);
+}
+
+.reel-card .reel-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.reel-card:hover .reel-play-btn {
+  transform: scale(1.15);
+  background: #D4AF37;
+  color: #000;
+}
+
+.reel-play-btn {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Horizontal scrollbar for mobile reel swipe */
+.reels-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.reels-scroll-container::-webkit-scrollbar-track {
+  background: #14161D;
+}
+.reels-scroll-container::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 3px;
+}
+

@@ -1,0 +1,14 @@
+# Dependencies & Temporary Files
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Vercel Build Output
+.vercel/
+
+# Submodules / Cloned frameworks if any
+superpowers/
+
+# Environment
+.env*
+!.env.example
